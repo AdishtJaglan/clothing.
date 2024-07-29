@@ -1,16 +1,17 @@
+import { Link } from "react-router-dom";
 import { FiShoppingCart, FiHeart, FiSearch } from "react-icons/fi";
 
 export default function Navbar() {
   return (
-    <nav className="flex w-full items-center justify-between p-6 bg-gray-200">
+    <nav className="flex w-full items-center justify-between bg-gray-200 p-6">
       <div className="w-70 flex items-center justify-between gap-8">
         <h2 className="text-4xl font-bold tracking-tighter">clothing.</h2>
         <div className="flex items-end gap-6">
           <p className="relative cursor-pointer text-base font-semibold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-black after:transition-transform after:duration-300 hover:after:scale-x-100">
-            Home
+            <Link to="/home">Home</Link>
           </p>
           <p className="relative cursor-pointer text-base font-semibold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-black after:transition-transform after:duration-300 hover:after:scale-x-100">
-            Store
+            <Link to="/catalog">Store</Link>
           </p>
         </div>
       </div>
