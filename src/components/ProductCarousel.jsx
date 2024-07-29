@@ -43,7 +43,7 @@ const ProductCarousel = () => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-6xl rounded-lg p-6">
+    <div className="mx-auto w-2/3 max-w-6xl rounded-lg p-6">
       <div className="relative overflow-hidden rounded-lg">
         <div
           className="flex transition-transform duration-500 ease-in-out"

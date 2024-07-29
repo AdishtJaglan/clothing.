@@ -15,7 +15,7 @@ export default function Home() {
           designed to elevate your wardrobe. Shop the latest trends and timeless
           pieces, delivered straight to your door.
         </p>
-        <button className="m-6 w-36 rounded-lg border-2 border-white p-4 text-sm font-bold text-gray-700 transition duration-300 hover:bg-gray-50">
+        <button className="m-6 mb-0 w-28 rounded-lg border-2 border-white p-3 text-sm font-bold text-gray-700 transition duration-300 hover:bg-gray-50">
           Shop Now
         </button>
         <ProductCarousel />
