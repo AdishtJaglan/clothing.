@@ -4,11 +4,17 @@ import { IoCartOutline, IoCartSharp } from "react-icons/io5";
 import { FiHeart } from "react-icons/fi";
 import { products as dataset } from "../data";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
-function CatalogCard({ name, price, image, liked }) {
+function CatalogCard({ name, price, image, liked, id }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isLiked, setIsLiked] = useState(liked);
   const [isInCart, setIsInCart] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCardClick = (id) => {
+    navigate(`/catalog/${id}`);
+  };
 
   return (
     <motion.div
@@ -32,6 +38,7 @@ function CatalogCard({ name, price, image, liked }) {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 className="rounded-full bg-white px-6 py-2 font-semibold text-gray-800 shadow-md"
+                onClick={() => handleCardClick(id)}
               >
                 Quick View
               </motion.button>
@@ -84,6 +91,7 @@ export default function CatalogCards() {
           {dataset.map((data, index) => (
             <CatalogCard
               key={index}
+              id={index}
               name={data.name}
               price={data.price}
               image={data.image}
@@ -101,4 +109,5 @@ CatalogCard.propTypes = {
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   liked: PropTypes.bool,
+  id: PropTypes.number.isRequired,
 };
