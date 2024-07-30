@@ -4,20 +4,50 @@ import { FiHeart, FiShoppingCart, FiCheck } from "react-icons/fi";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import { products } from "../data";
+import { useCart } from "../CartContext.js";
 import Navbar from "../components/Navbar";
 
 export default function Product() {
   const [isLiked, setIsLiked] = useState(false);
-  const [isInCart, setIsInCart] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const item = products[parseInt(id)];
+  const item = products.find((product) => product.id === parseInt(id));
+
+  const { cartItems, addToCart, removeFromCart } = useCart();
+  const isInCart = cartItems.some((cartItem) => cartItem.id === parseInt(id));
 
   if (!item) {
     return <div>404! Item not found</div>;
   }
+
+  const handleCartClick = () => {
+    if (isInCart) {
+      removeFromCart(parseInt(id));
+    } else {
+      addToCart({
+        id: parseInt(id),
+        name: item.name,
+        price: item.price,
+        image: item.image,
+        quantity: quantity,
+      });
+    }
+  };
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(newQuantity);
+    if (isInCart) {
+      removeFromCart(parseInt(id));
+      addToCart({
+        id: parseInt(id),
+        name: item.name,
+        price: item.price,
+        image: item.image,
+        quantity: newQuantity,
+      });
+    }
+  };
 
   return (
     <>
@@ -67,14 +97,16 @@ export default function Product() {
                 <div className="mb-6 flex items-center">
                   <span className="mr-4 text-lg font-semibold">Quantity:</span>
                   <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    onClick={() =>
+                      handleQuantityChange(Math.max(1, quantity - 1))
+                    }
                     className="rounded-full bg-gray-300 px-3 py-1 text-center text-xl font-bold"
                   >
                     -
                   </button>
                   <span className="mx-4 text-xl font-semibold">{quantity}</span>
                   <button
-                    onClick={() => setQuantity(quantity + 1)}
+                    onClick={() => handleQuantityChange(quantity + 1)}
                     className="rounded-full bg-gray-300 px-3 py-1 text-center text-xl font-bold"
                   >
                     +
@@ -106,7 +138,7 @@ export default function Product() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => setIsInCart(!isInCart)}
+                    onClick={handleCartClick}
                     className={`flex-1 rounded-xl py-3 text-xl font-semibold transition duration-300 ${
                       isInCart
                         ? "border-2 border-green-600 bg-green-100 text-green-600"

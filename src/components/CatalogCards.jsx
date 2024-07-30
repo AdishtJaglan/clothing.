@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IoCartOutline, IoCartSharp } from "react-icons/io5";
 import { FiHeart } from "react-icons/fi";
 import { products as dataset } from "../data";
 import PropTypes from "prop-types";
@@ -9,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 function CatalogCard({ name, price, image, liked, id }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isLiked, setIsLiked] = useState(liked);
-  const [isInCart, setIsInCart] = useState(false);
   const navigate = useNavigate();
 
   const handleCardClick = (id) => {
@@ -60,20 +58,6 @@ function CatalogCard({ name, price, image, liked, id }) {
           }`}
         >
           <FiHeart className="h-6 w-6" />
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setIsInCart(!isInCart)}
-          className={`rounded-full p-2 ${
-            isInCart ? "bg-green-500 text-white" : "bg-white text-gray-800"
-          }`}
-        >
-          {isInCart ? (
-            <IoCartSharp className="h-6 w-6" />
-          ) : (
-            <IoCartOutline className="h-6 w-6" />
-          )}
         </motion.button>
       </div>
     </motion.div>

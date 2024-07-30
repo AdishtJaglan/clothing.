@@ -24,7 +24,9 @@ export default function Navbar() {
             placeholder="Search"
           />
         </div>
-        <FiShoppingCart className="h-auto w-8 cursor-pointer" />
+        <Link to="/cart">
+          <FiShoppingCart className="h-auto w-6 cursor-pointer" />
+        </Link>
         <FiHeart className="h-auto w-8 cursor-pointer" />
       </div>
     </nav>
