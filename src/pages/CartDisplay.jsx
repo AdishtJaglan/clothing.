@@ -62,12 +62,12 @@ export default function CartDisplay() {
               {cartItems.map((item) => (
                 <motion.li
                   key={item.id}
-                  className="flex items-center justify-between p-6 transition-colors duration-200 hover:bg-gray-50"
+                  className="flex flex-col items-center justify-between p-6 transition-colors duration-200 hover:bg-gray-50 md:flex-row"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="flex items-center space-x-6">
+                  <div className="mx-4 flex w-full items-center justify-between space-x-4 md:justify-start md:space-x-6">
                     <img
                       src={item.image}
                       alt={item.name}
@@ -82,7 +82,7 @@ export default function CartDisplay() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
+                  <div className="mt-4 flex w-full items-center justify-between space-x-4 md:mt-0 md:w-auto md:justify-start">
                     <div className="flex items-center rounded-full bg-gray-100">
                       <button
                         onClick={() =>
