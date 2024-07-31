@@ -8,7 +8,7 @@ function FilterSection({ title, options, activeFilters, onFilterChange }) {
   return (
     <div className="mb-6">
       <motion.button
-        className="dark:bg-gray-700 dark:text-gray-4`00 flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-lg font-semibold text-gray-800 transition-colors duration-200 hover:bg-gray-300 focus:outline-none"
+        className="dark:bg-gray-700 dark:text-gray-400 flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-lg font-semibold text-gray-800 transition-colors duration-200 hover:bg-gray-300 focus:outline-none"
         onClick={() => setIsExpanded(!isExpanded)}
         whileTap={{ scale: 0.98 }}
       >
