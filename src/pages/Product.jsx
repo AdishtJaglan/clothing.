@@ -52,14 +52,7 @@ export default function Product() {
     <>
       <Navbar />
       <main className="relative min-h-screen bg-gray-200 py-20">
-        {/* <button
-          onClick={() => navigate(-1)}
-          className="group absolute left-36 top-12 flex items-center space-x-2 text-gray-600 transition-colors duration-300 hover:text-gray-800"
-        >
-          <IoChevronBackOutline className="text-2xl transition-all duration-300 group-hover:-translate-x-2" />
-          <span className="text-lg font-medium">Go Back</span>
-        </button> */}
-        <BackButton left={"36"} top={"12"} />
+        <BackButton top={"4rem"} left={"9rem"} />
         <div className="container mx-auto px-4">
           <div className="bg-gray-200 lg:flex">
             <motion.div

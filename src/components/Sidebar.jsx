@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
 
-function FilterSection({ title, options, activeFilter, onFilterChange }) {
+function FilterSection({ title, options, activeFilters, onFilterChange }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -35,9 +35,9 @@ function FilterSection({ title, options, activeFilter, onFilterChange }) {
                 className="flex cursor-pointer items-center space-x-3 rounded-md px-4 py-2 transition-colors duration-200 hover:bg-gray-100"
               >
                 <input
-                  type="radio"
-                  className="form-radio h-5 w-5 text-blue-600"
-                  checked={activeFilter === option}
+                  type="checkbox"
+                  className="form-checkbox h-5 w-5 text-blue-600"
+                  checked={activeFilters.includes(option)}
                   onChange={() => onFilterChange(option)}
                 />
                 <span className="capitalize text-gray-700">{option}</span>
@@ -50,11 +50,27 @@ function FilterSection({ title, options, activeFilter, onFilterChange }) {
   );
 }
 
-export default function Filters() {
-  const [activeFilter, setActiveFilter] = useState("");
+export default function Filters({ onFilterChange }) {
+  const [activeFilters, setActiveFilters] = useState([]);
 
   const handleFilterChange = (filter) => {
-    setActiveFilter(filter);
+    setActiveFilters((prev) => {
+      if (prev.includes(filter)) {
+        return prev.filter((f) => f !== filter);
+      } else {
+        return [...prev, filter];
+      }
+    });
+  };
+
+  const applyFilters = () => {
+    const filters = {
+      liked: activeFilters.includes("liked"),
+      category: activeFilters.filter((f) =>
+        ["shorts", "shirt", "cap"].includes(f),
+      ),
+    };
+    onFilterChange(filters);
   };
 
   return (
@@ -64,14 +80,14 @@ export default function Filters() {
       <FilterSection
         title="Favorites"
         options={["liked"]}
-        activeFilter={activeFilter}
+        activeFilters={activeFilters}
         onFilterChange={handleFilterChange}
       />
 
       <FilterSection
         title="Product Type"
-        options={["shorts", "shirts", "caps"]}
-        activeFilter={activeFilter}
+        options={["shorts", "shirt", "cap"]}
+        activeFilters={activeFilters}
         onFilterChange={handleFilterChange}
       />
 
@@ -79,7 +95,7 @@ export default function Filters() {
         className="w-full rounded-lg bg-blue-600 px-4 py-3 text-lg font-semibold text-white transition-colors duration-200 hover:bg-blue-700 focus:outline-none"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        onClick={() => console.log("Apply filters")}
+        onClick={applyFilters}
       >
         Apply Filters
       </motion.button>
@@ -90,6 +106,10 @@ export default function Filters() {
 FilterSection.propTypes = {
   title: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
-  activeFilter: PropTypes.string.isRequired,
+  activeFilters: PropTypes.array.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+};
+
+Filters.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
 };

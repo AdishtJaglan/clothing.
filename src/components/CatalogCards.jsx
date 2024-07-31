@@ -90,18 +90,38 @@ function CatalogCard({ name, price, image, liked, id }) {
   );
 }
 
-export default function CatalogCards() {
+export default function CatalogCards({ filters }) {
+  const [filteredProducts, setFilteredProducts] = useState(dataset);
+
+  useEffect(() => {
+    let newFilteredProducts = dataset;
+
+    if (filters.liked) {
+      newFilteredProducts = newFilteredProducts.filter(
+        (product) => product.liked,
+      );
+    }
+
+    if (filters.category && filters.category.length > 0) {
+      newFilteredProducts = newFilteredProducts.filter((product) =>
+        filters.category.includes(product.category),
+      );
+    }
+
+    setFilteredProducts(newFilteredProducts);
+  }, [filters]);
+
   return (
     <section className="">
       <div className="container mx-auto mt-6 p-4">
         <h2 className="mb-8 text-2xl font-bold text-gray-900">
-          Catalog ({dataset.length} items)
+          Catalog ({filteredProducts.length} items)
         </h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {dataset.map((data, index) => (
+          {filteredProducts.map((data) => (
             <CatalogCard
-              key={index}
-              id={index}
+              key={data.id}
+              id={data.id}
               name={data.name}
               price={data.price}
               image={data.image}
@@ -120,4 +140,8 @@ CatalogCard.propTypes = {
   image: PropTypes.string.isRequired,
   liked: PropTypes.bool,
   id: PropTypes.number.isRequired,
+};
+
+CatalogCards.propTypes = {
+  filters: PropTypes.object,
 };

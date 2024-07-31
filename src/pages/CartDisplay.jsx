@@ -140,7 +140,7 @@ export default function CartDisplay() {
           </motion.div>
         )}
       </div>
-      <BackButton top={"[9rem]"} left={"8"} />
+      <BackButton top={"9rem"} left={"1.2rem"} />
     </div>
   );
 }
