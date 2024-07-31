@@ -1,10 +1,10 @@
 import { useCart } from "../CartContext";
 import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
+import { IoChevronBackOutline } from "react-icons/io5";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import BackButton from "../components/BackButton";
 
 export default function CartDisplay() {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
@@ -140,7 +140,13 @@ export default function CartDisplay() {
           </motion.div>
         )}
       </div>
-      <BackButton top={"9rem"} left={"1.2rem"} />
+      <button
+        onClick={() => navigate(-1)}
+        className="group absolute left-4 top-20 flex items-center space-x-2 font-bold text-gray-600 transition-colors duration-300 hover:text-gray-800 sm:left-8 sm:top-24 md:left-12 md:top-28 lg:left-6 lg:top-36"
+      >
+        <IoChevronBackOutline className="h-5 w-5" />
+        <span className="hidden sm:inline">Go Back</span>
+      </button>
     </div>
   );
 }

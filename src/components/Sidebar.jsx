@@ -50,7 +50,7 @@ function FilterSection({ title, options, activeFilters, onFilterChange }) {
   );
 }
 
-export default function Filters({ onFilterChange }) {
+export default function Sidebar({ onFilterChange }) {
   const [activeFilters, setActiveFilters] = useState([]);
 
   const handleFilterChange = (filter) => {
@@ -74,7 +74,7 @@ export default function Filters({ onFilterChange }) {
   };
 
   return (
-    <div className="mx-auto max-w-md p-6">
+    <div className="h-full overflow-y-auto">
       <h2 className="mb-8 text-2xl font-bold text-gray-800">Refine Results</h2>
 
       <FilterSection
@@ -110,6 +110,6 @@ FilterSection.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
 };
 
-Filters.propTypes = {
+Sidebar.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
 };

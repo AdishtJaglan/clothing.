@@ -4,25 +4,25 @@ import ProductCarousel from "../components/ProductCarousel";
 
 export default function Home() {
   return (
-    <>
+    <div className="flex min-h-screen flex-col bg-gray-200">
       <Navbar />
-      <main className="flex h-auto w-full flex-col items-center justify-center bg-gray-200 p-6">
-        <h1 className="m-6 mt-0 p-3 text-4xl font-bold tracking-tighter">
+      <main className="flex flex-grow flex-col items-center justify-center p-4 sm:p-6">
+        <h1 className="m-4 mt-0 p-2 text-center text-3xl font-bold tracking-tighter sm:m-6 sm:p-3 sm:text-4xl">
           Welcome to clothing.
         </h1>
-        <p className="m-6 block w-2/3 text-center text-lg font-light">
+        <p className="m-4 block w-full text-center text-base font-light sm:m-6 sm:w-2/3 sm:text-lg">
           Explore our curated collection of stylish{" "}
           <span className="font-semibold tracking-tighter">clothing</span>,
           designed to elevate your wardrobe. Shop the latest trends and timeless
           pieces, delivered straight to your door.
         </p>
         <Link to="/catalog">
-          <button className="m-6 mb-0 w-28 rounded-lg border-2 border-white p-3 text-sm font-bold text-gray-700 transition duration-300 hover:bg-gray-50">
+          <button className="m-4 mb-0 w-28 rounded-lg border-2 border-white p-2 text-sm font-bold text-gray-700 transition duration-300 hover:bg-gray-50 sm:m-6 sm:p-3">
             Shop Now
           </button>
         </Link>
         <ProductCarousel />
       </main>
-    </>
+    </div>
   );
 }

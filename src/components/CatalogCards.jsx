@@ -39,7 +39,7 @@ function CatalogCard({ name, price, image, liked, id }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative aspect-square bg-gray-100">
-        <img src={image} alt={name} className="h-full w-full object-fill" />
+        <img src={image} alt={name} className="h-full w-full object-cover" />
         <AnimatePresence>
           {isHovered && (
             <motion.div
@@ -51,7 +51,7 @@ function CatalogCard({ name, price, image, liked, id }) {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="rounded-full bg-white px-6 py-2 font-semibold text-gray-800 shadow-md"
+                className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-gray-800 shadow-md sm:px-6 sm:text-base"
                 onClick={() => handleCardClick(id)}
               >
                 Quick View
@@ -61,8 +61,12 @@ function CatalogCard({ name, price, image, liked, id }) {
         </AnimatePresence>
       </div>
       <div className="bg-white p-4">
-        <h3 className="mb-2 text-lg font-semibold text-gray-800">{name}</h3>
-        <p className="text-xl font-bold text-blue-600">${price.toFixed(2)}</p>
+        <h3 className="mb-2 text-base font-semibold text-gray-800 sm:text-lg">
+          {name}
+        </h3>
+        <p className="text-lg font-bold text-blue-600 sm:text-xl">
+          ${price.toFixed(2)}
+        </p>
       </div>
       <div className="absolute right-2 top-2 flex flex-col space-y-2">
         <motion.button
@@ -73,7 +77,7 @@ function CatalogCard({ name, price, image, liked, id }) {
             isLiked ? "bg-red-500 text-white" : "bg-white text-gray-800"
           }`}
         >
-          <FiHeart className="h-6 w-6" />
+          <FiHeart className="h-5 w-5 sm:h-6 sm:w-6" />
         </motion.button>
         <motion.button
           whileHover={{ scale: 1.1 }}
@@ -83,7 +87,7 @@ function CatalogCard({ name, price, image, liked, id }) {
             isInCart ? "bg-green-500 text-white" : "bg-white text-gray-800"
           }`}
         >
-          <FiShoppingCart className="h-6 w-6" />
+          <FiShoppingCart className="h-5 w-5 sm:h-6 sm:w-6" />
         </motion.button>
       </div>
     </motion.div>
@@ -112,12 +116,12 @@ export default function CatalogCards({ filters }) {
   }, [filters]);
 
   return (
-    <section className="">
-      <div className="container mx-auto mt-6 p-4">
-        <h2 className="mb-8 text-2xl font-bold text-gray-900">
+    <section className="p-4">
+      <div className="container mx-auto mt-6">
+        <h2 className="mb-8 text-xl font-bold text-gray-900 sm:text-2xl">
           Catalog ({filteredProducts.length} items)
         </h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredProducts.map((data) => (
             <CatalogCard
               key={data.id}
