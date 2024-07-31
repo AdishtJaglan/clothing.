@@ -13,12 +13,12 @@ export default function Catalog() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-gray-200">
+    <div className="dark:bg-gray-900 flex min-h-screen flex-col bg-gray-200">
       <Navbar />
       <main className="flex-grow">
         <div className="flex">
           <aside
-            className={`fixed inset-y-0 left-0 z-20 w-64 transform bg-gray-200 p-4 transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${
+            className={`dark:bg-gray-900 fixed inset-y-0 left-0 z-20 w-64 transform bg-gray-200 p-4 transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${
               isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
@@ -26,7 +26,7 @@ export default function Catalog() {
           </aside>
           <div className="flex-grow">
             <button
-              className="fixed bottom-4 left-4 z-30 h-auto w-14 rounded-full bg-blue-600 p-2 text-white md:hidden"
+              className="dark:bg-blue-400 fixed bottom-4 left-4 z-30 h-auto w-14 rounded-full bg-blue-600 p-2 text-white md:hidden"
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
               {isSidebarOpen ? "✕" : "☰"}

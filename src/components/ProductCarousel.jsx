@@ -73,17 +73,17 @@ const ProductCarousel = () => {
               key={index}
               className={`w-full flex-shrink-0 p-2 sm:w-1/2 sm:p-3 lg:w-1/3`}
             >
-              <div className="overflow-hidden rounded-xl bg-gray-50 transition-all duration-300 hover:shadow-lg">
+              <div className="dark:bg-gray-800 overflow-hidden rounded-xl bg-gray-50 transition-all duration-300 hover:shadow-lg">
                 <img
                   src={item.image}
                   alt={item.name}
                   className="h-48 w-full object-contain sm:h-56 lg:h-64"
                 />
                 <div className="p-3 sm:p-4">
-                  <h3 className="mb-2 text-base font-semibold text-gray-800 sm:text-lg">
+                  <h3 className="dark:text-gray-100 mb-2 text-base font-semibold text-gray-800 sm:text-lg">
                     {item.name}
                   </h3>
-                  <p className="font-bold text-gray-600">
+                  <p className="dark:text-gray-300 font-bold text-gray-600">
                     ${item.price.toFixed(2)}
                   </p>
                 </div>

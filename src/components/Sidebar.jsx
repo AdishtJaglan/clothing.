@@ -8,7 +8,7 @@ function FilterSection({ title, options, activeFilters, onFilterChange }) {
   return (
     <div className="mb-6">
       <motion.button
-        className="flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-lg font-semibold text-gray-800 transition-colors duration-200 hover:bg-gray-300 focus:outline-none"
+        className="dark:bg-gray-700 dark:text-gray-4`00 flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-lg font-semibold text-gray-800 transition-colors duration-200 hover:bg-gray-300 focus:outline-none"
         onClick={() => setIsExpanded(!isExpanded)}
         whileTap={{ scale: 0.98 }}
       >
@@ -32,7 +32,7 @@ function FilterSection({ title, options, activeFilters, onFilterChange }) {
             {options.map((option) => (
               <label
                 key={option}
-                className="flex cursor-pointer items-center space-x-3 rounded-md px-4 py-2 transition-colors duration-200 hover:bg-gray-100"
+                className="dark:hover:bg-gray-700 flex cursor-pointer items-center space-x-3 rounded-md px-4 py-2 transition-colors duration-200 hover:bg-gray-100"
               >
                 <input
                   type="checkbox"
@@ -40,7 +40,9 @@ function FilterSection({ title, options, activeFilters, onFilterChange }) {
                   checked={activeFilters.includes(option)}
                   onChange={() => onFilterChange(option)}
                 />
-                <span className="capitalize text-gray-700">{option}</span>
+                <span className="dark:text-gray-400 capitalize text-gray-700">
+                  {option}
+                </span>
               </label>
             ))}
           </motion.div>
@@ -75,7 +77,9 @@ export default function Sidebar({ onFilterChange }) {
 
   return (
     <div className="h-full overflow-y-auto">
-      <h2 className="mb-8 text-2xl font-bold text-gray-800">Refine Results</h2>
+      <h2 className="dark:text-gray-400 mb-8 text-2xl font-bold text-gray-800">
+        Refine Results
+      </h2>
 
       <FilterSection
         title="Favorites"
@@ -92,7 +96,7 @@ export default function Sidebar({ onFilterChange }) {
       />
 
       <motion.button
-        className="w-full rounded-lg bg-blue-600 px-4 py-3 text-lg font-semibold text-white transition-colors duration-200 hover:bg-blue-700 focus:outline-none"
+        className="dark:bg-blue-400 dark:hover:bg-blue-600 w-full rounded-lg bg-blue-600 px-4 py-3 text-lg font-semibold text-white transition-colors duration-200 hover:bg-blue-700 focus:outline-none"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={applyFilters}
