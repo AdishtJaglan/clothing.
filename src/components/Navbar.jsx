@@ -40,14 +40,14 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="dark:bg-gray-900 bg-gray-200 p-4 md:p-6">
+      <nav className="bg-gray-200 p-4 dark:bg-gray-900 md:p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-evenly gap-6">
-            <h2 className="dark:text-gray-400 text-2xl font-bold tracking-tighter md:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tighter dark:text-gray-400 md:text-4xl">
               clothing.
             </h2>
 
-            <div className="dark:text-gray-400 mt-3 hidden items-center space-x-6 md:flex">
+            <div className="mt-3 hidden items-center space-x-6 dark:text-gray-400 md:flex">
               <NavLink to="/home">Home</NavLink>
               <NavLink to="/catalog">Store</NavLink>
             </div>
@@ -60,17 +60,17 @@ export default function Navbar() {
               handleSearch={handleSearch}
             />
             <Link to="/cart">
-              <FiShoppingCart className="dark:text-gray-400 h-6 w-6 cursor-pointer" />
+              <FiShoppingCart className="h-6 w-6 cursor-pointer dark:text-gray-400" />
             </Link>
-            <FiHeart className="dark:text-gray-400 h-9 w-9 cursor-pointer" />
+            <FiHeart className="h-9 w-9 cursor-pointer dark:text-gray-400" />
             <button
               onClick={toggleDarkMode}
-              className="dark:text-gray-200 text-gray-800"
+              className="text-gray-800 dark:text-gray-200"
             >
               {isDarkMode ? (
-                <FiSun className="dark:text-gray-400 h-6 w-6 cursor-pointer" />
+                <FiSun className="h-6 w-6 cursor-pointer dark:text-gray-400" />
               ) : (
-                <FiMoon className="dark:text-gray-400 h-6 w-6 cursor-pointer" />
+                <FiMoon className="h-6 w-6 cursor-pointer dark:text-gray-400" />
               )}
             </button>
           </div>
@@ -80,15 +80,15 @@ export default function Navbar() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
-              <FiX className="dark:text-gray-400 h-6 w-6" />
+              <FiX className="h-6 w-6 dark:text-gray-400" />
             ) : (
-              <FiMenu className="dark:text-gray-400 h-6 w-6" />
+              <FiMenu className="h-6 w-6 dark:text-gray-400" />
             )}
           </button>
         </div>
 
         {isMenuOpen && (
-          <div className="dark:text-gray-400 mt-4 md:hidden">
+          <div className="mt-4 dark:text-gray-400 md:hidden">
             <SearchBar
               mobile
               searchQuery={searchQuery}
@@ -108,7 +108,7 @@ export default function Navbar() {
               <FiHeart className="h-6 w-6 cursor-pointer" />
               <button
                 onClick={toggleDarkMode}
-                className="dark:text-gray-400 text-gray-800"
+                className="text-gray-800 dark:text-gray-400"
               >
                 {isDarkMode ? (
                   <FiSun className="h-6 w-6 cursor-pointer" />
@@ -123,20 +123,22 @@ export default function Navbar() {
 
       {isDialogOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="relative w-11/12 max-w-lg rounded-lg bg-white p-6 shadow-lg">
+          <div className="relative w-11/12 max-w-lg rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
             <button
-              className="absolute right-2 top-2 text-gray-500 hover:text-gray-700"
+              className="absolute right-2 top-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
               onClick={closeDialog}
             >
               <FiX className="mr-4 mt-4 h-6 w-6" />
             </button>
-            <h3 className="mb-4 text-lg font-bold">Search Results</h3>
+            <h3 className="mb-4 text-lg font-bold text-gray-800 dark:text-gray-300">
+              Search Results
+            </h3>
             {searchResults.length > 0 ? (
               <div className="space-y-4">
                 {searchResults.map((product) => (
                   <div
                     key={product.name}
-                    className="flex items-center space-x-4 rounded-lg border border-gray-200 p-3 shadow-sm"
+                    className="flex items-center space-x-4 rounded-lg border border-gray-200 p-3 shadow-sm dark:border-gray-700 dark:bg-gray-700"
                   >
                     <img
                       src={product.image}
@@ -144,21 +146,27 @@ export default function Navbar() {
                       className="h-16 w-16 rounded-lg object-cover"
                     />
                     <div className="flex-1">
-                      <p className="text-base font-medium">{product.name}</p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-base font-medium text-gray-800 dark:text-gray-200">
+                        {product.name}
+                      </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
                         {product.category}
                       </p>
-                      <p className="text-lg font-bold">${product.price}</p>
+                      <p className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                        ${product.price}
+                      </p>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-gray-600">No products found.</p>
+              <p className="text-gray-600 dark:text-gray-400">
+                No products found.
+              </p>
             )}
             <div className="mt-4 flex justify-end">
               <button
-                className="rounded-lg bg-gray-300 px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-400"
+                className="rounded-lg bg-gray-300 px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-400 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
                 onClick={closeDialog}
               >
                 Close
@@ -187,16 +195,16 @@ function NavLink({ to, children, mobile }) {
 function SearchBar({ mobile, searchQuery, setSearchQuery, handleSearch }) {
   return (
     <div
-      className={`dark:bg-gray-400 dark:hover:bg-gray-500 group flex items-center rounded-full bg-gray-50 p-2 transition-all duration-300 hover:bg-white ${
+      className={`group flex items-center rounded-full bg-gray-50 p-2 transition-all duration-300 hover:bg-white dark:bg-gray-400 dark:hover:bg-gray-500 ${
         mobile ? "mt-4" : "w-full"
       }`}
     >
       <FiSearch
-        className="dark:text-gray-200 ml-2 h-5 w-5 cursor-pointer"
+        className="ml-2 h-5 w-5 cursor-pointer dark:text-gray-200"
         onClick={handleSearch}
       />
       <input
-        className="dark:bg-gray-400 dark:group-hover:bg-gray-500 dark:placeholder-gray-200 ml-2 w-full bg-gray-50 text-black outline-none transition-all duration-300 hover:bg-white group-hover:bg-white"
+        className="ml-2 w-full bg-gray-50 text-black outline-none transition-all duration-300 hover:bg-white group-hover:bg-white dark:bg-gray-400 dark:text-gray-800 dark:placeholder-gray-200 dark:group-hover:bg-gray-500"
         placeholder="Search"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}

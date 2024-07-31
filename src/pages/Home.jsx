@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="dark:bg-gray-900 flex min-h-screen flex-col bg-gray-200">
       <Navbar />
-      <main className="dark:text-gray-200 flex flex-grow flex-col items-center justify-center p-4 sm:p-6">
+      <main className="dark:text-gray-400 flex flex-grow flex-col items-center justify-center p-4 sm:p-6">
         <h1 className="m-4 mt-0 p-2 text-center text-3xl font-bold tracking-tighter sm:m-6 sm:p-3 sm:text-4xl">
           Welcome to clothing.
         </h1>
@@ -17,7 +17,7 @@ export default function Home() {
           pieces, delivered straight to your door.
         </p>
         <Link to="/catalog">
-          <button className="dark:text-gray-200 dark:border-gray-200 dark:hover:text-gray-700 m-4 mb-0 w-28 rounded-lg border-2 border-white p-2 text-sm font-bold text-gray-700 transition duration-300 hover:bg-gray-50 sm:m-6 sm:p-3">
+          <button className="dark:text-gray-400 dark:border-gray-400 dark:hover:text-gray-700 m-4 mb-0 w-28 rounded-lg border-2 border-white p-2 text-sm font-bold text-gray-700 transition duration-300 hover:bg-gray-50 sm:m-6 sm:p-3">
             Shop Now
           </button>
         </Link>
