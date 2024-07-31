@@ -1,17 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiHeart } from "react-icons/fi";
+import { useCart } from "../CartContext";
 import { products as dataset } from "../data";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
 
 function CatalogCard({ name, price, image, liked, id }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isLiked, setIsLiked] = useState(liked);
+  const [isInCart, setIsInCart] = useState(false);
   const navigate = useNavigate();
+  const { addToCart, cartItems, removeFromCart } = useCart();
+
+  useEffect(() => {
+    setIsInCart(cartItems.some((item) => item.id === id));
+  }, [cartItems, id]);
 
   const handleCardClick = (id) => {
     navigate(`/catalog/${id}`);
+  };
+
+  const handleToggleCart = () => {
+    if (isInCart) {
+      removeFromCart(id);
+    } else {
+      addToCart({ id, name, price, image, quantity: 1 });
+    }
+    setIsInCart(!isInCart);
   };
 
   return (
@@ -46,7 +62,7 @@ function CatalogCard({ name, price, image, liked, id }) {
       </div>
       <div className="bg-white p-4">
         <h3 className="mb-2 text-lg font-semibold text-gray-800">{name}</h3>
-        <p className="text-xl font-bold text-gray-900">${price.toFixed(2)}</p>
+        <p className="text-xl font-bold text-blue-600">${price.toFixed(2)}</p>
       </div>
       <div className="absolute right-2 top-2 flex flex-col space-y-2">
         <motion.button
@@ -58,6 +74,16 @@ function CatalogCard({ name, price, image, liked, id }) {
           }`}
         >
           <FiHeart className="h-6 w-6" />
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={handleToggleCart}
+          className={`rounded-full p-2 ${
+            isInCart ? "bg-green-500 text-white" : "bg-white text-gray-800"
+          }`}
+        >
+          <FiShoppingCart className="h-6 w-6" />
         </motion.button>
       </div>
     </motion.div>

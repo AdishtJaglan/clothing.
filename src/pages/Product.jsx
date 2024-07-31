@@ -1,18 +1,17 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FiHeart, FiShoppingCart, FiCheck } from "react-icons/fi";
-import { IoChevronBackOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import { products } from "../data";
 import { useCart } from "../CartContext.js";
 import Navbar from "../components/Navbar";
+import BackButton from "../components/BackButton.jsx";
 
 export default function Product() {
   const [isLiked, setIsLiked] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
   const { id } = useParams();
-  const navigate = useNavigate();
   const item = products.find((product) => product.id === parseInt(id));
 
   const { cartItems, addToCart, removeFromCart } = useCart();
@@ -53,13 +52,14 @@ export default function Product() {
     <>
       <Navbar />
       <main className="relative min-h-screen bg-gray-200 py-20">
-        <button
+        {/* <button
           onClick={() => navigate(-1)}
-          className="group absolute left-36 top-12 flex items-center space-x-2 text-gray-700 transition hover:text-black"
+          className="group absolute left-36 top-12 flex items-center space-x-2 text-gray-600 transition-colors duration-300 hover:text-gray-800"
         >
-          <IoChevronBackOutline className="transition group-hover:-translate-x-1" />
-          <span>Go Back</span>
-        </button>
+          <IoChevronBackOutline className="text-2xl transition-all duration-300 group-hover:-translate-x-2" />
+          <span className="text-lg font-medium">Go Back</span>
+        </button> */}
+        <BackButton left={"36"} top={"12"} />
         <div className="container mx-auto px-4">
           <div className="bg-gray-200 lg:flex">
             <motion.div
@@ -85,7 +85,7 @@ export default function Product() {
                   {item.name}
                 </h1>
                 <p className="mb-6 text-xl text-gray-600">{item.desc}</p>
-                <p className="mb-4 text-3xl font-bold text-gray-800">
+                <p className="mb-4 text-3xl font-bold text-blue-600">
                   ${item.price.toFixed(2)}
                 </p>
                 <div className="mb-6 flex items-center">

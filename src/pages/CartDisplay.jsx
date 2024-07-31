@@ -1,9 +1,10 @@
 import { useCart } from "../CartContext";
-import Navbar from "../components/Navbar";
 import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
-import { IoChevronBackOutline } from "react-icons/io5";
+import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import BackButton from "../components/BackButton";
 
 export default function CartDisplay() {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
@@ -29,13 +30,9 @@ export default function CartDisplay() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="rounded-lg bg-white p-12 text-center shadow-lg"
+            className="flex flex-col items-center justify-center rounded-lg bg-white p-12 text-center shadow-lg"
           >
-            <img
-              src="/empty-cart.svg"
-              alt="Empty cart"
-              className="mx-auto mb-6 w-64"
-            />
+            <MdOutlineRemoveShoppingCart className="mb-12 h-auto w-[50px]" />
             <p className="mb-6 text-2xl text-gray-600">Your cart is empty.</p>
             <button
               onClick={() => navigate("/shop")}
@@ -143,13 +140,7 @@ export default function CartDisplay() {
           </motion.div>
         )}
       </div>
-      <button
-        onClick={() => navigate(-1)}
-        className="fixed bottom-8 left-8 flex items-center space-x-2 text-gray-600 transition-colors duration-300 hover:text-gray-800"
-      >
-        <IoChevronBackOutline className="text-2xl" />
-        <span className="text-lg font-medium">Go Back</span>
-      </button>
+      <BackButton top={"[9rem]"} left={"8"} />
     </div>
   );
 }
