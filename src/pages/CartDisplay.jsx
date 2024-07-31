@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useCart } from "../CartContext";
-import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiMinus, FiPlus, FiTrash2, FiX } from "react-icons/fi";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -8,6 +9,7 @@ import Navbar from "../components/Navbar";
 
 export default function CartDisplay() {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
+  const [isReceiptOpen, setIsReceiptOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleQuantityChange = (itemId, newQuantity) => {
@@ -16,6 +18,14 @@ export default function CartDisplay() {
     } else {
       removeFromCart(itemId);
     }
+  };
+
+  const handleProceedToCheckout = () => {
+    setIsReceiptOpen(true);
+  };
+
+  const closeReceipt = () => {
+    setIsReceiptOpen(false);
   };
 
   return (
@@ -133,7 +143,10 @@ export default function CartDisplay() {
                   </span>
                 </div>
               </div>
-              <button className="mt-8 w-full rounded-full bg-blue-600 py-4 text-lg font-semibold text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              <button
+                onClick={handleProceedToCheckout}
+                className="mt-8 w-full rounded-full bg-blue-600 py-4 text-lg font-semibold text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
                 Proceed to Checkout
               </button>
             </div>
@@ -147,6 +160,59 @@ export default function CartDisplay() {
         <IoChevronBackOutline className="h-5 w-5" />
         <span className="hidden sm:inline">Go Back</span>
       </button>
+
+      {isReceiptOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="relative w-11/12 max-w-md rounded-lg bg-white p-6 shadow-lg"
+          >
+            <button
+              onClick={closeReceipt}
+              className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+            >
+              <FiX className="h-6 w-6" />
+            </button>
+            <h3 className="mb-4 text-center text-2xl font-bold">Receipt</h3>
+            <div className="space-y-4">
+              {cartItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex justify-between border-b border-dashed border-gray-300 pb-2"
+                >
+                  <span className="text-gray-600">{item.name}</span>
+                  <span className="text-gray-600">x{item.quantity}</span>
+                  <span className="text-gray-800">
+                    ${item.price.toFixed(2)}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 border-t border-gray-300 pt-4">
+              <div className="flex justify-between text-lg font-bold">
+                <span>Total</span>
+                <span>
+                  $
+                  {cartItems
+                    .reduce(
+                      (total, item) => total + item.price * item.quantity,
+                      0,
+                    )
+                    .toFixed(2)}
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={closeReceipt}
+              className="mt-6 w-full rounded-lg bg-blue-600 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-blue-700"
+            >
+              Close
+            </button>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }
