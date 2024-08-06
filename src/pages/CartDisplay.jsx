@@ -29,10 +29,10 @@ export default function CartDisplay() {
   };
 
   return (
-    <div className="dark:bg-gray-900 dark min-h-screen bg-gray-200 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-200 transition-colors duration-300 dark:bg-gray-900">
       <Navbar />
       <div className="container mx-auto px-4 py-12">
-        <h2 className="dark:text-gray-300 mb-8 text-center text-4xl font-extrabold text-gray-800">
+        <h2 className="mb-8 text-center text-4xl font-extrabold text-gray-800 dark:text-gray-300">
           Your Shopping Cart
         </h2>
         {cartItems.length === 0 ? (
@@ -40,15 +40,15 @@ export default function CartDisplay() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="dark:bg-gray-800 flex flex-col items-center justify-center rounded-lg bg-white p-12 text-center shadow-lg"
+            className="flex flex-col items-center justify-center rounded-lg bg-white p-12 text-center shadow-lg dark:bg-gray-800"
           >
-            <MdOutlineRemoveShoppingCart className="dark:text-gray-400 mb-12 h-auto w-[50px] text-gray-600" />
-            <p className="dark:text-gray-300 mb-6 text-2xl text-gray-600">
+            <MdOutlineRemoveShoppingCart className="mb-12 h-auto w-[50px] text-gray-600 dark:text-gray-400" />
+            <p className="mb-6 text-2xl text-gray-600 dark:text-gray-300">
               Your cart is empty.
             </p>
             <button
               onClick={() => navigate("/shop")}
-              className="dark:bg-blue-500 dark:hover:bg-blue-600 rounded-full bg-blue-600 px-6 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-blue-700"
+              className="rounded-full bg-blue-600 px-6 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
             >
               Start Shopping
             </button>
@@ -58,13 +58,13 @@ export default function CartDisplay() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="dark:bg-gray-800 overflow-hidden rounded-lg bg-white shadow-lg"
+            className="overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800"
           >
-            <ul className="dark:divide-gray-700 divide-y divide-gray-200">
+            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
               {cartItems.map((item) => (
                 <motion.li
                   key={item.id}
-                  className="dark:hover:bg-gray-700 flex flex-col items-center justify-between p-6 transition-colors duration-200 hover:bg-gray-50 md:flex-row"
+                  className="flex flex-col items-center justify-between p-6 transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 md:flex-row"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
@@ -73,42 +73,42 @@ export default function CartDisplay() {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="dark:shadow-xl dark:bg-gray-600 h-24 w-24 rounded-lg object-cover shadow-md"
+                      className="h-24 w-24 rounded-lg object-cover shadow-md dark:bg-gray-600 dark:shadow-xl"
                     />
                     <div>
-                      <h3 className="dark:text-gray-100 mb-1 text-xl font-semibold text-gray-800">
+                      <h3 className="mb-1 text-xl font-semibold text-gray-800 dark:text-gray-100">
                         {item.name}
                       </h3>
-                      <p className="dark:text-blue-400 text-lg font-medium text-blue-600">
+                      <p className="text-lg font-medium text-blue-600 dark:text-blue-400">
                         ${item.price.toFixed(2)}
                       </p>
                     </div>
                   </div>
                   <div className="mt-4 flex w-full items-center justify-between space-x-4 md:mt-0 md:w-auto md:justify-start">
-                    <div className="dark:bg-gray-700 flex items-center rounded-full bg-gray-100">
+                    <div className="flex items-center rounded-full bg-gray-100 dark:bg-gray-700">
                       <button
                         onClick={() =>
                           handleQuantityChange(item.id, item.quantity - 1)
                         }
-                        className="dark:text-gray-300 dark:hover:bg-gray-600 rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-200"
+                        className="rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-600"
                       >
                         <FiMinus />
                       </button>
-                      <span className="dark:text-gray-200 w-10 text-center text-lg font-semibold text-gray-800">
+                      <span className="w-10 text-center text-lg font-semibold text-gray-800 dark:text-gray-200">
                         {item.quantity}
                       </span>
                       <button
                         onClick={() =>
                           handleQuantityChange(item.id, item.quantity + 1)
                         }
-                        className="dark:text-gray-300 dark:hover:bg-gray-600 rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-200"
+                        className="rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-600"
                       >
                         <FiPlus />
                       </button>
                     </div>
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="dark:bg-red-900 dark:text-red-300 dark:hover:bg-red-800 rounded-full bg-red-100 p-2 text-red-500 transition-colors hover:bg-red-200"
+                      className="rounded-full bg-red-100 p-2 text-red-500 transition-colors hover:bg-red-200 dark:bg-red-900 dark:text-red-300 dark:hover:bg-red-800"
                     >
                       <FiTrash2 />
                     </button>
@@ -116,12 +116,12 @@ export default function CartDisplay() {
                 </motion.li>
               ))}
             </ul>
-            <div className="dark:bg-gray-700 bg-gray-50 p-8">
+            <div className="bg-gray-50 p-8 dark:bg-gray-700">
               <div className="mb-4 flex justify-between">
-                <span className="dark:text-gray-300 text-xl text-gray-600">
+                <span className="text-xl text-gray-600 dark:text-gray-300">
                   Subtotal
                 </span>
-                <span className="dark:text-gray-100 text-xl font-semibold text-gray-800">
+                <span className="text-xl font-semibold text-gray-800 dark:text-gray-100">
                   $
                   {cartItems
                     .reduce(
@@ -131,12 +131,12 @@ export default function CartDisplay() {
                     .toFixed(2)}
                 </span>
               </div>
-              <div className="dark:border-gray-600 border-t border-gray-200 pt-4">
+              <div className="border-t border-gray-200 pt-4 dark:border-gray-600">
                 <div className="flex justify-between">
-                  <span className="dark:text-gray-100 text-2xl font-bold text-gray-800">
+                  <span className="text-2xl font-bold text-gray-800 dark:text-gray-100">
                     Total
                   </span>
-                  <span className="dark:text-blue-400 text-2xl font-bold text-blue-600">
+                  <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                     $
                     {cartItems
                       .reduce(
@@ -149,7 +149,7 @@ export default function CartDisplay() {
               </div>
               <button
                 onClick={handleProceedToCheckout}
-                className="dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-offset-gray-800 mt-8 w-full rounded-full bg-blue-600 py-4 text-lg font-semibold text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="mt-8 w-full rounded-full bg-blue-600 py-4 text-lg font-semibold text-white transition-colors duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-offset-gray-800"
               >
                 Proceed to Checkout
               </button>
@@ -159,7 +159,7 @@ export default function CartDisplay() {
       </div>
       <button
         onClick={() => navigate(-1)}
-        className="dark:text-gray-400 dark:hover:text-gray-100 group absolute left-4 top-20 flex items-center space-x-2 font-bold text-gray-600 transition-colors duration-300 hover:text-gray-800 sm:left-8 sm:top-24 md:left-12 md:top-28 lg:left-6 lg:top-36"
+        className="group absolute left-4 top-20 flex items-center space-x-2 font-bold text-gray-600 transition-colors duration-300 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-100 sm:left-8 sm:top-24 md:left-12 md:top-28 lg:left-6 lg:top-36"
       >
         <IoChevronBackOutline className="h-5 w-5 transition duration-300 group-hover:-translate-x-2" />
         <span className="hidden sm:inline">Go Back</span>
@@ -171,39 +171,39 @@ export default function CartDisplay() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="dark:bg-gray-800 relative w-11/12 max-w-md rounded-lg bg-white p-6 shadow-lg"
+            className="relative w-11/12 max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
           >
             <button
               onClick={closeReceipt}
-              className="dark:text-gray-400 dark:hover:text-gray-200 absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+              className="absolute right-4 top-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
             >
               <FiX className="h-6 w-6" />
             </button>
-            <h3 className="dark:text-gray-300 mb-4 text-center text-2xl font-bold text-gray-800">
+            <h3 className="mb-4 text-center text-2xl font-bold text-gray-800 dark:text-gray-300">
               Receipt
             </h3>
             <div className="space-y-4">
               {cartItems.map((item) => (
                 <div
                   key={item.id}
-                  className="dark:border-gray-600 flex justify-between border-b border-dashed border-gray-300 pb-2"
+                  className="flex justify-between border-b border-dashed border-gray-300 pb-2 dark:border-gray-600"
                 >
-                  <span className="dark:text-gray-300 text-gray-600">
+                  <span className="text-gray-600 dark:text-gray-300">
                     {item.name}
                   </span>
-                  <span className="dark:text-gray-300 text-gray-600">
+                  <span className="text-gray-600 dark:text-gray-300">
                     x{item.quantity}
                   </span>
-                  <span className="dark:text-gray-100 text-gray-800">
+                  <span className="text-gray-800 dark:text-gray-100">
                     ${item.price.toFixed(2)}
                   </span>
                 </div>
               ))}
             </div>
-            <div className="dark:border-gray-600 mt-6 border-t border-gray-300 pt-4">
+            <div className="mt-6 border-t border-gray-300 pt-4 dark:border-gray-600">
               <div className="flex justify-between text-lg font-bold">
-                <span className="dark:text-gray-100 text-gray-800">Total</span>
-                <span className="dark:text-blue-400 text-blue-600">
+                <span className="text-gray-800 dark:text-gray-100">Total</span>
+                <span className="text-blue-600 dark:text-blue-400">
                   $
                   {cartItems
                     .reduce(
@@ -216,7 +216,7 @@ export default function CartDisplay() {
             </div>
             <button
               onClick={closeReceipt}
-              className="dark:bg-blue-500 dark:hover:bg-blue-600 mt-6 w-full rounded-lg bg-blue-600 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-blue-700"
+              className="mt-6 w-full rounded-lg bg-blue-600 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
             >
               Close
             </button>
